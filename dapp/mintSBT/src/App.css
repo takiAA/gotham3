@@ -1,0 +1,174 @@
+/*======= GOOGLE FONTS ======*/
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(239, 196, 117, 0.5979045793121937) 50%, rgba(0, 0, 0, 1) 70%);
+  background-size: cover;
+}
+
+.center {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+.sbt-pic {
+  width: 30vw;
+  height: 30vw;
+  z-index: 2;
+}
+
+.input-str {
+  margin-top: 3vh;
+  font-size: 1.6vw;
+  width: 26vw;
+  height: 3vw;
+  z-index: 3;
+  border-radius: 10vw;
+  border-style: solid;
+  text-align: center;
+  align-items: center;
+  line-height: 2.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-str {
+  width: 24vw;
+  color: #efc475;
+}
+
+.mint-button,
+.connect-button {
+  font-size: 1.8vw;
+  width: 12vw;
+  height: 3vw;
+  z-index: 3;
+  border-radius: 10vw;
+  border-style: solid;
+  text-align: center;
+  align-items: center;
+  line-height: 2.8vw;
+  transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mint-button:hover,
+.connect-button:hover {
+  cursor: pointer;
+  background-color: #efc475;
+  color: #000;
+  transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mint-button:active,
+.connect-button:active {
+  background-color: rgba(239, 197, 118, 0.8);
+  transition: all 0.1s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.connect-button {
+  position: fixed;
+  right: 2vw;
+  top: 4vh;
+}
+
+.mint-button {
+  margin-top: 2vh;
+}
+
+.back {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: rgba(239, 197, 118, 0.6);
+  z-index: 0;
+}
+
+.gotham3 {
+  position: fixed;
+  top: 1vh;
+  left: 1vw;
+  font-size: 14vh;
+  line-height: 14vh;
+}
+
+.sbt {
+  position: fixed;
+  right: 1vw;
+  bottom: 0vh;
+  font-size: 7vw;
+}
+
+/*======= CSS VARIABLES ======*/
+:root {
+  /*======= Colors ======*/
+  /* Color mode */
+  --bg-color: #000;
+  --text-color: #efc475;
+
+  /*======= Font and Typography ======*/
+  --mont-font: 'Fredericka the Great', cursive;
+
+  /*======= Font Weight ======*/
+  --weight-400: 400;
+}
+
+/*======= BASE ======*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+textarea {
+  font-family: var(--mont-font);
+  font-size: var(--normal-font-size);
+  font-weight: var(--weight-400);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-color);
+  font-family: var(--mont-font);
+  font-weight: var(--weight-400);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+}

@@ -1,0 +1,98 @@
+.personal-center {
+    display: flex;
+    flex-direction: column;
+}
+
+.personal-wrap .up {
+    
+}
+
+.personal-wrap .data-word {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    height: 8vw;
+    width: 32vw;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+}
+
+.personal-wrap .flex-row {
+    width: 32vw;
+    justify-content: space-between;
+}
+
+.personal-wrap .table {
+    margin-left: 1vw;
+}
+
+/* .personal-data-cell-last {
+    width: 40vw;
+    height: 5.2vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.personal-data-name {
+    width: 20vw;
+    height: 4.8vh;
+    margin-left: 1.5vw;
+    font-size: 1.1vw;
+    display: flex;
+    align-items: center;
+}
+
+.personal-data-number {
+    width: 20vw;
+    height: 4.8vh;
+    margin-right: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 1.1vw;
+} */
+
+.down {
+    margin-top: 5vh;
+    display: flex;
+}
+
+.table {
+    width: 70vw;
+}
+
+.personal-wrap .op {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.personal-unmark-button,
+.personal-arbi-button {
+    background-color: #65C999;
+    color: #fff;
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+    width: 6vw;
+    margin-left: 1vw;
+    font-weight: var(--weight-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.personal-unmark-button:hover,
+.personal-arbi-button:hover {
+    cursor: pointer;
+}
+
+.personal-arbi-button {
+
+}

@@ -1,0 +1,128 @@
+.rank-center {
+    display: flex;
+    flex-direction: column;
+}
+
+.table {
+    width: 63vw;
+    margin-top: 3vh;
+    margin-left: 3vw;
+}
+
+.mark-button {
+    background-color: #65C999;
+    color: #fff;
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+    width: 6vw;
+    margin: auto;
+    font-weight: var(--weight-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.mark-button.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+    width: 6vw;
+    margin: auto;
+    font-weight: var(--weight-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 gray,
+        0.2vw 0 0 0 gray,
+        0 -0.2vw 0 0 gray,
+        0 0.2vw 0 0 gray;
+}
+
+.mark-button:hover {
+    cursor: pointer;
+}
+
+.rank-title {
+    margin-left: 3vw;
+    margin-top: 5vh;
+    height: 2vw;
+    color: #efc475;
+    font-size: 1.6vw;
+    font-family: var(--pro-font);
+}
+
+.MuiTablePagination-displayedRows,
+.MuiTablePagination-actions {
+    font-family: var(--pro-font);
+}
+
+.pageButton {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    height: 4vw;
+    left: 28vw;
+    top: 88vh;
+}
+
+.leftPage {
+    transform: rotate(180deg);
+    margin-bottom: -4.83vw;
+    margin-left: 0.5vw;
+}
+
+.rightPage {
+    margin-left: 9.5vw;
+    margin-bottom: 4.83vw;
+}
+
+.topLeft:hover {
+    cursor: pointer;
+}
+
+.bottomLeft,
+.highLightLeft,
+.topLeft {
+    position: absolute;
+}
+
+.bottomLeft {
+    margin-left: -0.5vw;
+    margin-top: -0.1vw;
+}
+
+.highLightLeft {
+    margin-left: 0.15vw;
+    margin-top: 0.7vw;
+}
+
+.topLeft {
+    margin-top: 1.15vw;
+    margin-left: 0.55vw;
+}
+
+.pageCount {
+    position: fixed;
+    left: 29vw;
+    top: 88vh;
+    display: flex;
+    width: 12vw;
+}
+
+.pageCountText {
+    width: 6vw;
+    height: 4vw;
+    font-family: var(--pixel2-font);
+    font-weight: var(--weight-400);
+    font-size: 1.5vw;
+    line-height: 3.8vw;
+}

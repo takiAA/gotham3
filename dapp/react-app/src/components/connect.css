@@ -1,0 +1,133 @@
+.connect-button {
+    background-color: #65C999;
+    width: 10vw;
+    height: 4vh;
+    position: fixed;
+    top: 2.5vh;
+    right: 6vw;
+    font-size: 1.5vw;
+    line-height: 4vh;
+    text-align: center;
+    font-weight: var(--weight-600);
+    font-family: var(--pixel2-font);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.connect-button:hover,
+.zh-connect-button:hover {
+    cursor: pointer;
+    background-color: #51c28c;
+    box-shadow: -0.2vw 0 0 0 #51c28c,
+        0.2vw 0 0 0 #51c28c,
+        0 -0.2vw 0 0 #51c28c,
+        0 0.2vw 0 0 #51c28c;
+}
+
+.connect-button:active,
+.zh-connect-button:active {
+    background-color: #41b97f;
+    box-shadow: -0.2vw 0 0 0 #41b97f,
+        0.2vw 0 0 0 #41b97f,
+        0 -0.2vw 0 0 #41b97f,
+        0 0.2vw 0 0 #41b97f;
+}
+
+.zh-connect-button {
+    font-size: 1.1vw;
+    font-family: Unifont;
+    background-color: #65C999;
+    width: 10vw;
+    height: 4vh;
+    position: fixed;
+    top: 2.5vh;
+    right: 6vw;
+    line-height: 4vh;
+    text-align: center;
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.par {
+    background-color: rgba(60, 66, 73, 0.8);
+    width: 10vw;
+    height: 4vh;
+    position: fixed;
+    top: 2.5vh;
+    right: 6vw;
+    overflow: hidden;
+    font-size: 1.5vw;
+    line-height: 4vh;
+    text-align: center;
+    font-weight: var(--weight-600);
+    font-family: var(--pixel2-font);
+    box-shadow: -0.2vw 0 0 0 rgba(60, 66, 73, 0.8),
+        0.2vw 0 0 0 rgba(60, 66, 73, 0.8),
+        0 -0.2vw 0 0 rgba(60, 66, 73, 0.8),
+        0 0.2vw 0 0 rgba(60, 66, 73, 0.8);
+}
+
+.par:hover .connected,
+.zh-par:hover .connected {
+    padding-top: 4vh;
+    cursor: pointer;
+    background-color: #505962;
+}
+
+.par:active .connected,
+.zh-par:active .connected {
+    background-color: #606a76;
+    box-shadow: -0.2vw 0 0 0 #606a76,
+        0.2vw 0 0 0 #606a76,
+        0 -0.2vw 0 0 #606a76,
+        0 0.2vw 0 0 #606a76;
+}
+
+.par:hover,
+.zh-par:hover {
+    box-shadow: -0.2vw 0 0 0 #505962,
+        0.2vw 0 0 0 #505962,
+        0 -0.2vw 0 0 #505962,
+        0 0.2vw 0 0 #505962;
+}
+
+.par:active,
+.zh-par:active {
+    box-shadow: -0.2vw 0 0 0 #606a76,
+        0.2vw 0 0 0 #606a76,
+        0 -0.2vw 0 0 #606a76,
+        0 0.2vw 0 0 #606a76;
+}
+
+.zh-par {
+    font-size: 1.5vw;
+    font-family: var(--pixel2-font);
+    background-color: rgba(60, 66, 73, 0.8);
+    width: 10vw;
+    height: 4vh;
+    position: fixed;
+    top: 2.5vh;
+    right: 6vw;
+    overflow: hidden;
+    line-height: 4vh;
+    text-align: center;
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 rgba(60, 66, 73, 0.8),
+        0.2vw 0 0 0 rgba(60, 66, 73, 0.8),
+        0 -0.2vw 0 0 rgba(60, 66, 73, 0.8),
+        0 0.2vw 0 0 rgba(60, 66, 73, 0.8);
+}
+
+.zh-par:hover .connected {
+    font-size: 1.1vw;
+    font-family: Unifont;
+}
+
+.disconnect {
+    margin-top: -8vh;
+}

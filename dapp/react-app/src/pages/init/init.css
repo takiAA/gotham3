@@ -1,0 +1,136 @@
+/* .init-center {
+    width: 80vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    font-weight: var(--weight-600);
+    font-family: var(--pro-font);
+} */
+
+.init-up {
+    display: flex;
+    flex-direction: column;
+    height: 11vh;
+}
+
+/* .rors {
+    font-size: 1.1vw;
+    margin-left: 2vw;
+    margin-top: 0.2vh;
+    color: #fafafa;
+    width: 6vw;
+    height: 4.1vh;
+    font-weight: var(--weight-600);
+    background-color: #525252;
+    border-radius: 0.8vw;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+} */
+
+/* .init-button {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    margin-left: 1.8vw;
+    width: 8vw;
+    height: 4vh;
+    background-color: #479B50;
+    border-radius: 0.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--weight-600);
+    font-size: 1.1vw;
+}
+
+.init-button:hover {
+    cursor: pointer;
+    background-color: #3D6B42;
+}
+
+.init-button:active {
+    background-color: #345b39;
+}
+
+.init-data .data-cell {
+    width: 28vw;
+} */
+
+.init-data-wrap {
+    width: 70vw;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    justify-content: space-between;
+}
+
+.init-data-wrap .data-word {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vh;
+    height: 2vw;
+    width: 32vw;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.init-data-wrap .risky,
+.init-data-wrap .safe,
+.init-data-wrap .flex-row {
+    margin-left: 1vw;
+}
+
+.init-data-wrap .flex-row {
+    width: 32vw;
+    justify-content: space-between;
+}
+
+.init-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.init-data-wrap .mark-info {
+    width: 30vw;
+    margin-top: 5vh;
+    margin-right: 1vw;
+    font-size: 1vw;
+    line-height: 1.2vw;
+}
+
+.join-button {
+    background-color: #65C999;
+    color: #fff;
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+    width: 6vw;
+    margin: auto;
+    font-weight: var(--weight-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.join-button:hover {
+    cursor: pointer;
+}
+
+.init-table {
+    width: 68vw;
+    margin-top: 5vh;
+    margin-left: 1vw;
+}

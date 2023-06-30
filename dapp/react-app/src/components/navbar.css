@@ -1,0 +1,201 @@
+.left-nav {
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    width: 18vw;
+    z-index: 2;
+    background-color: transparent;
+    background-color: rgba(41, 45, 50, 0.7);
+    border-radius: 0vh;
+}
+
+.wrap-background {
+    height: 100vh;
+    width: 100vw;
+    right: 0;
+    position: fixed;
+    z-index: -2;
+    background-size: cover;
+    background-image: url("../assets/pixel.png");
+    background-color: #0E0E11;
+    /* background: rgb(34, 36, 42);
+    background: radial-gradient(circle, rgba(34, 36, 42, 1) 14%, rgba(71, 155, 80, 1) 35%, rgba(34, 36, 42, 1) 70%); */
+}
+
+.main-page {
+    width: 16vw;
+    display: flex;
+    align-items: center;
+}
+
+.main-page:hover {
+    cursor: pointer;
+}
+
+.logo {
+    width: 4vw;
+    height: 4vw;
+    margin-left: 1.2vw;
+    margin-top: 1.2vh;
+}
+
+.gotham3 {
+    width: 10vw;
+    height: 2vw;
+    margin-top: 1.2vh;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.icon {
+    width: 1.3vw;
+    height: 1.3vw;
+    margin-left: 0.7vw;
+    margin-top: 0.6vh;
+}
+
+.nav__name {
+    font-size: 1.5vw;
+    font-weight: var(--weight-400);
+    line-height: 1.5vw;
+    margin-left: 0.7vw;
+    margin-top: 0.4vh;
+    text-align: left;
+    font-family: var(--pixel2-font);
+    width: 15vw;
+}
+
+.zh-nav__name {
+    font-size: 1.1vw;
+    font-weight: var(--weight-600);
+    line-height: 1.5vw;
+    margin-left: 0.7vw;
+    margin-top: 0.4vh;
+    text-align: left;
+    font-family: Unifont;
+    width: 15vw;
+}
+
+.nav-link {
+    display: flex;
+    align-items: flex-start;
+    width: 14vw;
+    height: 2vw;
+    margin-top: 1.3vh;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: -0.2vw 0 0 0 rgba(255, 255, 255, 0.2),
+        0.2vw 0 0 0 rgba(255, 255, 255, 0.2),
+        0 -0.2vw 0 0 rgba(255, 255, 255, 0.2),
+        0 0.2vw 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.nav-link:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: -0.2vw 0 0 0 rgba(255, 255, 255, 0.4),
+        0.2vw 0 0 0 rgba(255, 255, 255, 0.4),
+        0 -0.2vw 0 0 rgba(255, 255, 255, 0.4),
+        0 0.2vw 0 0 rgba(255, 255, 255, 0.4);
+}
+
+#sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: -0.2vw 0 0 0 rgba(255, 255, 255, 0.2),
+        0.2vw 0 0 0 rgba(255, 255, 255, 0.2),
+        0 -0.2vw 0 0 rgba(255, 255, 255, 0.2),
+        0 0.2vw 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.bottom-switcher {
+    position: fixed;
+    bottom: 4vh;
+    left: 2vw;
+    display: flex;
+}
+
+.v-line {
+    margin-left: 0.4vw;
+    margin-right: 0.3vw;
+    height: 1.5vw;
+    font-size: 1.4vw;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pixel2-font);
+}
+
+.en-button,
+.zh-button {
+    width: 2.5vw;
+    height: 1.6vw;
+    line-height: 1.5vw;
+    text-align: center;
+    font-size: 1.3vw;
+    font-family: Unifont;
+}
+
+.en-button:hover,
+.zh-button:hover,
+.zh-en-button:hover,
+.zh-zh-button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: -2px 0 0 0 rgba(255, 255, 255, 0.2),
+        2px 0 0 0 rgba(255, 255, 255, 0.2),
+        0 -2px 0 0 rgba(255, 255, 255, 0.2),
+        0 2px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.en-button:active,
+.zh-button:active,
+.zh-en-button:active,
+.zh-zh-button:active {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: -2px 0 0 0 rgba(255, 255, 255, 0.4),
+        2px 0 0 0 rgba(255, 255, 255, 0.4),
+        0 -2px 0 0 rgba(255, 255, 255, 0.4),
+        0 2px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+.zh-en-button,
+.zh-zh-button {
+    width: 2.5vw;
+    height: 1.6vw;
+    line-height: 1.6vw;
+    text-align: center;
+    font-size: 0.9vw;
+    font-family: Unifont;
+}
+
+.no-arrow {
+    display: none;
+}
+
+.show-arrow {
+    position: absolute;
+    display: flex;
+}
+
+.left-arrow {
+    margin-left: -1.5vw;
+    margin-top: 0.6vh;
+    z-index: 3;
+    width: 1.3vw;
+    height: 1.3vw;
+}
+
+.right-arrow {
+    margin-left: 14.3vw;
+    margin-top: 0.6vh;
+    z-index: 3;
+    width: 1.3vw;
+    height: 1.3vw;
+    transform: rotate(180deg);
+}

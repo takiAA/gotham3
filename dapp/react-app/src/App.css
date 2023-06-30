@@ -1,0 +1,80 @@
+/*======= GOOGLE FONTS ======*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro');
+@import './assets/font/font.css';
+
+/*======= CSS VARIABLES ======*/
+:root {
+    /*======= Colors ======*/
+    /* Color mode */
+    --safe-color: #479B50;
+    --danger-color: #D81724;
+    --text-color: #fafafa;
+    --bg-color: #000;
+    --flag-color: #c2c2c2;
+
+    /*======= Font and Typography ======*/
+    --mont-font: 'Montserrat', sans-serif;
+    --pixel2-font: 'VT323';
+    --pixel3-font: 'Unifont Regular';
+    --pro-font: 'Source Code Pro';
+
+    --h1-font-size: 36;
+    --h2-font-size: 32;
+    --normal-font-size: 16;
+    --tiny-font-size: 12;
+
+    /*======= Font Weight ======*/
+    --weight-400: 400;
+    --weight-600: 600;
+}
+
+/*======= BASE ======*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+input,
+textarea {
+    font-family: var(--pro-font);
+    font-size: var(--normal-font-size);
+    font-weight: var(--weight-400);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--text-color);
+    font-family: var(--mont-font);
+    font-weight: var(--weight-600);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+img {
+    max-width: 100%;
+}
