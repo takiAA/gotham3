@@ -12,7 +12,7 @@ Gotham3
 ├── plugin           # 谷歌插件源代码
 │   ├── ...
 │
-└── webapp           # Node.js 后端
+└── dpp           # dapp代码
     ├── ...
 
 ```
