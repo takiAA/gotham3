@@ -6,7 +6,7 @@ Gotham3 是一个基于区块链的项目，该项目包含智能合约、谷歌
 ```
 Gotham3
 │
-├── contracts        # 智能合约
+├── contracts        # 智能合约 
 │   ├── ...
 │
 ├── plugin           # 谷歌插件源代码

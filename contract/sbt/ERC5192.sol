@@ -7,7 +7,7 @@ import {IERC5192} from "./IERC5192.sol";
 contract ERC5192 is ERC721, IERC5192 {
   bool private isLocked;
   address private owner;
-  uint256 private _tokenIds;
+  uint256 private _tokenIds; 
 
   // Mapping from token ID to token URIs
   mapping (uint256 => string) private _tokenURIs;
