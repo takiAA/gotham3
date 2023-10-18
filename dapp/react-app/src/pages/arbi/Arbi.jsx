@@ -61,6 +61,7 @@ const Arbi = () => {
   const [provider, setProvider] = React.useState(null);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [typeSelect, setTypeSelect] = React.useState('Website');
 
   // 控制表格页面
   const handleChangePage = (event, newPage) => {
@@ -150,14 +151,33 @@ const Arbi = () => {
     }
     return { url, bad, safe, time, address, isInArbitration, isVote, ArbitratioTimes };
   }
+  function dataFilter(data, type) {
+    let res = data;
+    switch(type) {
+      case 'Website':
+        res = data.filter(item => !item.url.endsWith('.eth') && !item.url.startsWith('@'));
+        break;
+      case 'Twitter':
+        res = data.filter(item => item.url.startsWith('@'));
+        break;
+      case 'ENS':
+        res = data.filter(item => item.url.endsWith('.eth'));
+        break;
+    }
+
+    return res;
+  }
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`${API_URLS.getBannedUrlList}`);
-      const data = response.data;
+      let data = response.data;
+      // 过滤类型
+      data = dataFilter(data.data, typeSelect);
       console.log(data);
 
       // 使用 Promise.all 来处理异步 createData 函数
-      const dataPromises = data.data.map((item, index) => createData(item.url, item.downvotes, item.upvotes, '1 days', item.score));
+      const dataPromises = data.map((item, index) => createData(item.url, item.downvotes, item.upvotes, '1 days', item.score));
 
       const resolvedData = await Promise.all(dataPromises);
       const filteredData = resolvedData.filter(row => row.isInArbitration);
@@ -198,6 +218,10 @@ const Arbi = () => {
     return `${days}${dayText} ${hrs}${hourText} ${mnts}${minuteText} ${seconds}${secondText}`;
     //return `${days}天${hrs}小时${mnts}分钟${seconds}秒`;
   }
+  // 改变数据查询类型
+  function changeType(type) {
+    setTypeSelect(type);
+  }
 
   // 每50秒钟请求一次数据
   React.useEffect(() => {
@@ -216,61 +240,78 @@ const Arbi = () => {
       clearInterval(counter);
       clearInterval(timer);
     }
-  }, [provider]);
+  }, [provider,typeSelect]);
 
   return (
     <div className='page'>
       <Connect onProviderUpdate={handleProviderUpdate} />
-      <h2 className='arbi-title'>{t("Arbitration List")}</h2>
-      <div className='table'>
-        <TableContainer component={Paper} style={{ maxWidth: '64vw', maxHeight: "52vh", overflow: 'auto', backgroundColor: 'transparent' }}>
-          <Table sx={{ minWidth: 100 }} size="small" aria-label="a-dense-table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>{t("URL in Arbitration")}</StyledTableCell>
-                <StyledTableCell align="left">{t("Risky Arbi Stake")}</StyledTableCell>
-                <StyledTableCell align="left">{t("Safe Arbi Stake")}</StyledTableCell>
-                <StyledTableCell align="left">{t("Remaining Time")}</StyledTableCell>
-                <StyledTableCell align="center">{t("Operation")}</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                <StyledTableRow
-                  key={row.no}
-                  sx={{}}
-                >
-                  <StyledTableCell component="th" scope="row">
-                    {row.url}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{row.bad}</StyledTableCell>
-                  <StyledTableCell align="left">{row.safe}</StyledTableCell>
-                  <StyledTableCell align="left">{formatTime(row.time)}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    <div className='op'>
-                      <div className={`arbi-downvote-button ${row.isVote ? 'disabled' : ''}`} onClick={row.isVote ? null : () => vote(row.url, row.address, false)}>
-                        {t("downvote")}
+      <div className='arbi-center'>
+        <h2 className='arbi-title'>{t("Arbitration List")}</h2>
+        <div className='type-select-block'>
+          <div className='mark-select' tabindex="0">
+            <div className='select-title'>
+              {/* 当前数据类型 */}
+              <div className='select-title-type'>{typeSelect}</div>
+              <svg className='up-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+              <svg className='down-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+            </div>
+            <div className='select-open'>
+              <div className='select-option option-1' onClick={() => changeType('Website')} >Website</div>
+              <div className='select-option option-2' onClick={() => changeType('Twitter')} >Twitter</div>
+              <div className='select-option option-3' onClick={() => changeType('ENS')} >ENS</div>
+            </div>
+          </div>
+        </div>
+        <div className='table'>
+          <TableContainer component={Paper} style={{ maxWidth: '64vw', maxHeight: "60vh", overflow: 'auto', backgroundColor: 'transparent' }}>
+            <Table sx={{ minWidth: 100 }} size="small" aria-label="a-dense-table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>{t("URL in Arbitration")}</StyledTableCell>
+                  <StyledTableCell align="left">{t("Risky Arbi Stake")}</StyledTableCell>
+                  <StyledTableCell align="left">{t("Safe Arbi Stake")}</StyledTableCell>
+                  <StyledTableCell align="left">{t("Remaining Time")}</StyledTableCell>
+                  <StyledTableCell align="center">{t("Operation")}</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                  <StyledTableRow
+                    key={row.no}
+                    sx={{}}
+                  >
+                    <StyledTableCell component="th" scope="row">
+                      {row.url}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.bad}</StyledTableCell>
+                    <StyledTableCell align="left">{row.safe}</StyledTableCell>
+                    <StyledTableCell align="left">{formatTime(row.time)}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      <div className='op'>
+                        <div className={`arbi-downvote-button ${row.isVote ? 'disabled' : ''}`} onClick={row.isVote ? null : () => vote(row.url, row.address, false)}>
+                          {t("downvote")}
+                        </div>
+                        <div className={`arbi-upvote-button ${row.isVote ? 'disabled' : ''}`} onClick={row.isVote ? null : () => vote(row.url, row.address, true)}>
+                          {t("upvote")}
+                        </div>
                       </div>
-                      <div className={`arbi-upvote-button ${row.isVote ? 'disabled' : ''}`} onClick={row.isVote ? null : () => vote(row.url, row.address, true)}>
-                        {t("upvote")}
-                      </div>
-                    </div>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          sx={{
-            display: 'none',
-          }}
-        />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            sx={{
+              display: 'none',
+            }}
+          />
+        </div>
       </div>
       <div className='op-area'>
         <div className='pageCount'>

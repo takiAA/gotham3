@@ -83,7 +83,7 @@
 
 .url-wrap {
     border-bottom: 0.3vw dashed #65C999;
-    width: 60vw;
+    width: 45vw;
     margin-left: 1.5vw;
 }
 
@@ -99,7 +99,7 @@
 
 .ftx-url {
     font-size: 2vw;
-    width: 60vw;
+    width: 43vw;
     height: 3vw;
     font-weight: var(--weight-600);
     margin-left: 1vw;
@@ -124,6 +124,102 @@
     width: 1.5vw;
     height: 1.5vw;
     transform: rotate(180deg);
+}
+
+.mark-select {
+    margin-left: 2vw;
+    margin-top: 0.5vw;
+    background-color: #26725A;
+    color: #fff;
+    font-family: var(--pro-font);
+    font-size: 1.4vw;
+    font-weight: var(--weight-600);
+    text-align: center;
+    width: 12vw;
+    height: auto;
+    line-height: 1.6vw;
+    border: 0.2vw dashed #fff;
+    border-radius: 2px;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mark-select:hover {
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mark-select:focus {
+    transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mark-select:focus .select-open {
+    display: inline;
+    position: absolute;
+    width: 12.02vw;
+    line-height: 1.6vw;
+    margin-top: 1.8vw;
+    margin-left: -0.2vw;
+    background: #1D4F40;
+    color: #fff;
+    border-left: 0.2vw dashed #fff;
+    border-right: 0.2vw dashed #fff;
+    border-bottom: 0.2vw dashed #fff;
+}
+
+.mark-select .select-open {
+    display: none;
+}
+
+.select-option {
+    z-index: 4;
+    width: 11.65vw;
+}
+
+.select-option:hover {
+    cursor: pointer;
+}
+
+.option-1:hover,
+.option-2:hover,
+.option-3:hover {
+    background-color: #26725A;
+}
+
+.select-title {
+    display: flex;
+}
+
+.select-title-type {
+    margin-left: 1.45vw;
+    width: 8.7vw;
+    text-align: center;
+}
+
+.up-arrow{
+    width: 1vw;
+    height: 1.6vw;
+    align-items: center;
+    transform: rotate(270deg);
+    display: none;
+}
+
+.down-arrow {
+    width: 1vw;
+    height: 1.6vw;
+    align-items: center;
+    transform: rotate(90deg);
+}
+
+.mark-select:focus .up-arrow {
+    display: inline;
+}
+
+.mark-select:focus .down-arrow {
+    display: none;
 }
 
 .data {
@@ -255,6 +351,7 @@
 
 .number-wrap {
     border: 3px dashed #65C999;
+    border-radius: 2px;
 }
 
 .token-number {
@@ -356,6 +453,7 @@
     width: 5vw;
     text-align: center;
     line-height: 2.1vw;
+    user-select: none;
 }
 
 .zh-mark-safe-text,
@@ -367,6 +465,7 @@
     font-family: Unifont;
     font-size: 1.5vw;
     line-height: 2.1vw;
+    user-select: none;
 }
 
 .mark-bad-text,

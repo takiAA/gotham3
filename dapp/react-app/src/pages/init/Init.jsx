@@ -74,6 +74,7 @@ const Init = () => {
   const [arbitrationTokens, setArbitrationTokens] = React.useState(0);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [typeSelect, setTypeSelect] = React.useState('Website');
 
   // 控制表格页面
   const handleChangePage = (event, newPage) => {
@@ -148,6 +149,10 @@ const Init = () => {
     }
     return { url, bad, safe, time, address, isInArbitration, tokenForArbitration };
   }
+  // 改变数据查询类型
+  function changeType(type) {
+    setTypeSelect(type);
+  }
   // 发起仲裁
   const handleInitiateArbitration = async () => {
     console.log(`获取到的url为:${url}`)
@@ -170,15 +175,32 @@ const Init = () => {
     setDirection(direction);
     handleInitiateArbitration();
   };
+  function dataFilter(data, type) {
+    let res = data;
+    switch(type) {
+      case 'Website':
+        res = data.filter(item => !item.url.endsWith('.eth') && !item.url.startsWith('@'));
+        break;
+      case 'Twitter':
+        res = data.filter(item => item.url.startsWith('@'));
+        break;
+      case 'ENS':
+        res = data.filter(item => item.url.endsWith('.eth'));
+        break;
+    }
+
+    return res;
+  }
   // 获取未仲裁url信息
   const fetchData = async () => {
     try {
       const response = await axios.get(`${API_URLS.getBannedUrlList}`);
-      const data = response.data;
+      let data = response.data;
+      data = dataFilter(data.data, typeSelect);
       console.log(data);
 
       // 使用 Promise.all 来处理异步 createData 函数
-      const dataPromises = data.data.map((item, index) => createData(item.url, item.downvotes, item.upvotes, '1 days', item.score));
+      const dataPromises = data.map((item, index) => createData(item.url, item.downvotes, item.upvotes, '1 days', item.score));
 
       const resolvedData = await Promise.all(dataPromises);
 
@@ -225,7 +247,7 @@ const Init = () => {
       clearInterval(counter);
       clearInterval(timer);
     }
-  }, [url, provider]);
+  }, [url, provider,typeSelect]);
   // 定时器解析
   function formatTime(seconds) {
     const days = Math.floor(seconds / (24 * 60 * 60));
@@ -267,7 +289,10 @@ const Init = () => {
     // 当前用户
     console.log(currentAccount)
     try {
-      url = getTopLevelDomain(url)
+      if(typeSelect=="Website"){
+        url = getTopLevelDomain(url)
+      }
+      
       console.log(url)
       const poolAddress = await contract.methods.getStakingContract(url, 0).call();
       console.log("Pool address:", poolAddress);
@@ -310,7 +335,9 @@ const Init = () => {
     console.log(currentAccount)
     // 调用智能合约函数
     try {
-      url = getTopLevelDomain(url)
+      if(typeSelect=="Website"){
+        url = getTopLevelDomain(url)
+      }
       console.log(url)
       let websiteInfo = new Object();
       websiteInfo.url = url
@@ -382,7 +409,7 @@ const Init = () => {
         <Connect onProviderUpdate={handleProviderUpdate} />
 
         <div className='init-up'>
-          <div className='target'>Site:</div>
+          <div className='target'>{t("Target")}</div>
           <div className='url'>
             <svg className='left-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
             <div className='url-wrap'>
@@ -395,6 +422,19 @@ const Init = () => {
               />
             </div>
             <svg className='right-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+            <div className='mark-select' tabindex="0">
+                <div className='select-title'>
+                  {/* 当前数据类型 */}
+                  <div className='select-title-type'>{typeSelect}</div>
+                  <svg className='up-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+                  <svg className='down-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+                </div>
+                <div className='select-open'>
+                  <div className='select-option option-1' onClick={() => changeType('Website')} >Website</div>
+                  <div className='select-option option-2' onClick={() => changeType('Twitter')} >Twitter</div>
+                  <div className='select-option option-3' onClick={() => changeType('ENS')} >ENS</div>
+                </div>
+              </div>
           </div>
           {/* <div className='init-choose'>
             <select
@@ -461,6 +501,8 @@ const Init = () => {
             </div>
           </div>
         </div>
+        
+        {/* <div className='show-table-button'>Show</div> */}
 
         <div className='init-table'>
           <TableContainer component={Paper} style={{ maxWidth: '68vw', maxHeight: "50vh", overflow: 'auto', backgroundColor: 'transparent' }}>

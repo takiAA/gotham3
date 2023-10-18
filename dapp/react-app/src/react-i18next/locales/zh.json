@@ -73,7 +73,7 @@
 	"staking period":"质押时长",
 	"Arbitration record":"个人仲裁",
 	"Total Arbitration" : "总仲裁投票数",
-	"Site": "网站:",
+	"Target": "目标:",
 	"Data": "数据:",
 	"DataInfoTitle": "数据相关说明:",
 	"DataInfo1": "'质押人数' 是质押标记该网站的用户总数",
@@ -95,5 +95,7 @@
 	"ArbiInfo4": "点击'危险'或'安全'来发起仲裁",
 	"Arbitration Record": "仲裁历史:",
 	"SiteMarkedAs": "该网站已被标记为",
-	"Balance": "余额:"
+	"Balance": "余额:",
+	"Invalid Twitter" : "twitter用户名格式不正确",
+	"Invalid ENS": "ENS域名格式不正确"
 }

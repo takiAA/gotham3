@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import "./navbar.css"
 import logo from "../assets/logo.png"
 import gotham3 from "../assets/gotham3.png"
+import gotham3Pixel from "../assets/gotham3-pixel.png"
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
@@ -23,7 +24,7 @@ const Navbar = () => {
       <nav className='left-nav' id='sidebar'>
         <div className='main-page' onClick={jumpSite}>
           <img src={logo} className="logo" width="50px" height="50px"></img>
-          <img src={gotham3} className="gotham3" width="120px" height="25px"></img>
+          <img src={gotham3Pixel} className="gotham3-pixel" width="1589px" height="512px"></img>
         </div>
         <div className='tool'>
           <NavLink to="/" className="nav-link">

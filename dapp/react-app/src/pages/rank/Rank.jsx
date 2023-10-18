@@ -58,6 +58,7 @@ const Rank = () => {
   const [provider, setProvider] = React.useState(null);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [typeSelect, setTypeSelect] = React.useState('Website');
 
   // 控制表格页面
   const handleChangePage = (event, newPage) => {
@@ -74,16 +75,17 @@ const Rank = () => {
       setPage(nowPage + 1);
   }
 
-  async function createData(no, name, bad, safe, rate, score) {
+  async function createData(no, name, bad, safe, rate, score, web3, contract, account) {
     let isInArbitration = false
-    if (provider) {
-      const web3 = new Web3(provider);
+    if (provider && web3 && contract && account) {
+      // const web3 = new Web3(provider);
       // 与智能合约交互
-      const contract = new web3.eth.Contract(stakeContractABI, stakeContractAddress);
+      // const contract = new web3.eth.Contract(stakeContractABI, stakeContractAddress);
 
       // 从钱包获取当前地址
-      const accounts = await web3.eth.getAccounts();
-      const currentAccount = accounts[0];
+      // const accounts = await web3.eth.getAccounts();
+      // const currentAccount = accounts[0];
+      const currentAccount = account;
       try {
         let urlPoolAddress = await contract.methods.getStakingContract(name, 0).call({ from: currentAccount });
         console.log(`getStakingContract:${urlPoolAddress}`)
@@ -107,41 +109,45 @@ const Rank = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${API_URLS.getBannedUrlList}`);
-      const data = response.data;
-      console.log(data)
+      const respData = response.data;
+      console.log(respData)
+
+      // 过滤类型
+      const data = dataFilter(respData.data, typeSelect);
+
+      let web3, contract, currentAccount;
       if (provider) {
         // 如果你的provider是在fetchData函数内部创建的，你可以在这里创建它
-        const web3 = new Web3(provider);
-        const contract = new web3.eth.Contract(stakeContractABI, stakeContractAddress);
+        web3 = new Web3(provider);
+        contract = new web3.eth.Contract(stakeContractABI, stakeContractAddress);
         // 如果你的provider是在fetchData函数外部创建的，你应该把它作为一个参数传入fetchData函数
         const accounts = await web3.eth.getAccounts();
-        const currentAccount = accounts[0];
-        if (currentAccount == null || currentAccount == undefined) {
-          return
-        }
-        const promises = data.data.map((item, index) => createData(
-          index + 1,
-          item.url,
-          item.downvotes,
-          item.upvotes,
-          '10%',
-          item.score,
-          contract,
-          web3
-        ));
-
-        const rows = await Promise.all(promises);
-        // 先根据 score 降序排序，再根据 name 升序排序
-        rows.sort((a, b) => {
-          // 如果 score 不相等，则按照 score 降序排序
-          if (a.score !== b.score) {
-            return b.score - a.score;
-          }
-          // 如果 score 相等，则按照 name 升序排序
-          return a.name.localeCompare(b.name);
-        });
-        setRows(rows);
+        currentAccount = accounts[0];
       }
+      // 不连钱包也可查看
+      const promises = data.map((item, index) => createData(
+        index + 1,
+        item.url,
+        item.downvotes,
+        item.upvotes,
+        '10%',
+        item.score,
+        web3,
+        contract,
+        currentAccount,
+      ));
+
+      const rows = await Promise.all(promises);
+      // 先根据 score 降序排序，再根据 name 升序排序
+      rows.sort((a, b) => {
+        // 如果 score 不相等，则按照 score 降序排序
+        if (a.score !== b.score) {
+          return b.score - a.score;
+        }
+        // 如果 score 相等，则按照 name 升序排序
+        return a.name.localeCompare(b.name);
+      });
+      setRows(rows);
     }
     catch (error) {
       console.error('Error fetching data:', error);
@@ -161,21 +167,45 @@ const Rank = () => {
 
   // 每分钟请求一次数据
   React.useEffect(() => {
+    // 切换类型分页从0开始
+    setPage(0);
     fetchData();
     const timer = setInterval(() => {
       fetchData();
     }, 60000);
 
     return () => clearInterval(timer);
-  }, [provider]);
+  }, [provider, typeSelect]);
 
 
   async function markEvent(url) {
     const origin = window.location.origin;  // 获取当前URL的域名
-    const targetUrl = `${origin}/alpha/?attachUrl=${encodeURIComponent(url)}`;
+    const targetUrl = `${origin}/beta/?attachUrl=${encodeURIComponent(url)}`;
     //window.open(targetUrl, "_blank"); // 在新窗口中打开URL
     // 或者，希望在当前窗口中打开URL，你可以使用：
     window.location.href = targetUrl;
+  }
+
+  // 改变数据查询类型
+  function changeType(type) {
+    setTypeSelect(type);
+  }
+
+  function dataFilter(data, type) {
+    let res = data;
+    switch(type) {
+      case 'Website':
+        res = data.filter(item => !item.url.endsWith('.eth') && !item.url.startsWith('@'));
+        break;
+      case 'Twitter':
+        res = data.filter(item => item.url.startsWith('@'));
+        break;
+      case 'ENS':
+        res = data.filter(item => item.url.endsWith('.eth'));
+        break;
+    }
+
+    return res;
   }
 
   return (
@@ -183,8 +213,23 @@ const Rank = () => {
       <Connect onProviderUpdate={handleProviderUpdate} />
       <div className='rank-center'>
         <h2 className='rank-title'>{t("Risk Website Ranking")}</h2>
+        <div className='type-select-block'>
+          <div className='mark-select' tabindex="0">
+            <div className='select-title'>
+              {/* 当前数据类型 */}
+              <div className='select-title-type'>{typeSelect}</div>
+              <svg className='up-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+              <svg className='down-arrow' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" d="M9.525 18.025q-.5.325-1.012.038T8 17.175V6.825q0-.6.513-.888t1.012.038l8.15 5.175q.45.3.45.85t-.45.85l-8.15 5.175Z" /></svg>
+            </div>
+            <div className='select-open'>
+              <div className='select-option option-1' onClick={() => changeType('Website')} >Website</div>
+              <div className='select-option option-2' onClick={() => changeType('Twitter')} >Twitter</div>
+              <div className='select-option option-3' onClick={() => changeType('ENS')} >ENS</div>
+            </div>
+          </div>
+        </div>
         <div className='table'>
-          <TableContainer component={Paper} style={{ maxWidth: '64vw', maxHeight: "50vh", overflow: 'auto', backgroundColor: 'transparent' }}>
+          <TableContainer component={Paper} style={{ maxWidth: '64vw', maxHeight: "60vh", overflow: 'auto', backgroundColor: 'transparent' }}>
             <Table sx={{ minWidth: '10vw' }} size="small" aria-label="a-dense-table">
               <TableHead>
                 <TableRow>
@@ -204,7 +249,7 @@ const Rank = () => {
                     sx={{}}
                   >
                     <StyledTableCell component="th" scope="row" align="center">
-                      {page * rowsPerPage+index + 1}
+                      {page * rowsPerPage + index + 1}
                     </StyledTableCell>
                     <StyledTableCell align="left">{row.name}</StyledTableCell>
                     <StyledTableCell align="left">{row.bad}</StyledTableCell>

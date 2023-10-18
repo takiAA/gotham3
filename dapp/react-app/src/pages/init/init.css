@@ -60,7 +60,7 @@
 
 .init-data-wrap {
     width: 70vw;
-    height: 25vh;
+    height: 28vh;
     display: flex;
     flex-direction: row;
     font-family: var(--pro-font);
@@ -113,7 +113,6 @@
     line-height: 0.8vw;
     width: 6vw;
     margin: auto;
-    font-weight: var(--weight-400);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,6 +130,29 @@
 
 .init-table {
     width: 68vw;
-    margin-top: 5vh;
+    margin-top: 2vh;
     margin-left: 1vw;
+}
+
+.show-table-button {
+    background-color: #65C999;
+    color: #fff;
+    font-size: 1.2vw;
+    line-height: 1.2vw;
+    width: 7vw;
+    height: 1.5vw;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pro-font);
+    font-weight: var(--weight-600);
+    box-shadow: -0.2vw 0 0 0 #65C999,
+        0.2vw 0 0 0 #65C999,
+        0 -0.2vw 0 0 #65C999,
+        0 0.2vw 0 0 #65C999;
+}
+
+.show-table-button:hover {
+    cursor: pointer;
 }

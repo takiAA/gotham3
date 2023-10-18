@@ -13,7 +13,7 @@ const { stakeContractABI, stakeContractAddress } = stakeContractData
 const { erc20ABI, erc20Address } = tokenContractData
 const { poolContractABI } = poolContractData
 
-const MarkCard = ({ url, provider }) => {
+const MarkCard = ({ url, provider,urlType }) => {
     const [tokenNumber, setTokenNumber] = React.useState(0);
     const [balance, setBalance] = React.useState(0);
     const [selectedTime, setSelectedTime] = React.useState("0");
@@ -52,7 +52,7 @@ const MarkCard = ({ url, provider }) => {
       }
     // 处理点击事件
     const handleSubmit = async (type, tokenNumber, selectedTime) => {
-        const topLevelDomain = getTopLevelDomain(url);
+        let topLevelDomain=checkData(url,urlType)
         if (topLevelDomain == "") {
             return
         }
@@ -136,16 +136,41 @@ const MarkCard = ({ url, provider }) => {
             // const poolContract = new web3.eth.Contract(poolContractABI, urlPoolAddress);
             // await poolContract.methods.stake(stakeAmount, isSafe).send({ from: currentAccount });
             //await axios.get(`${API_URLS.addBannedUrl}?attachUrl=${url}`);
-            toast.success(t("stake success") + url)
+            //toast.success(t("stake success") + url)
 
         } catch (error) {
             toast.error(t("function fail"))
             console.error(t("function fail"), error);
         }
     }
+    function checkData(url, type) {
+        console.log("check url" + type)
+        switch (type) {
+            case 'Website':
+                if (!url.endsWith('.eth') && !url.startsWith('@')) {
+                    return getTopLevelDomain(url)
+                }
+                break;
+            case 'Twitter':
+                if (!url.startsWith('@')) {
+                    toast.error(t("Invalid Twitter"))
+                    return ""
+                }
+                break;
+            case 'ENS':
+                if (!url.endsWith('.eth')) {
+                    toast.error(t("Invalid ENS"))
+                    return ""
+                }
+                break;
+        }
+
+        return url;
+    }
     // 获取顶级域名
     function getTopLevelDomain(myUrl) {
         try {
+            
             if (myUrl.indexOf(":") == -1) {
                 const urlParts = myUrl.split('.');
                 // 该情况为顶级域名

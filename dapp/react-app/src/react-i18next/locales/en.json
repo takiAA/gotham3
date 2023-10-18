@@ -69,7 +69,7 @@
 	"downvote":"Downvote",
 	"staking period":"Staking Period",
 	"Arbitration record":"Arbitration Record",
-	"Site": "Site:",
+	"Target": "Target:",
 	"Data": "Data:",
 	"DataInfoTitle": "Some info about the data:",
 	"DataInfo1": "'Staker Count' is the total amount of users who have staked to mark this site.",
@@ -91,5 +91,7 @@
 	"ArbiInfo4": "Click 'Risky' or 'Safe' to start arbitration.",
 	"Arbitration Record": "Arbitration Record:",
 	"SiteMarkedAs": "This site has been marked as",
-	"Balance": "balance:"
+	"Balance": "balance:",
+	"Invalid Twitter" : "Incorrect Twitter username format.",
+	"Invalid ENS": "Invalid ENS domain format"
 }

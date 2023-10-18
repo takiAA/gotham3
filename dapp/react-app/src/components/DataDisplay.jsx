@@ -8,7 +8,7 @@ const { poolContractABI } = poolContractData
 
 const { stakeContractABI, stakeContractAddress } = stakeContractData
 
-const DataDisplay = ({ url, provider }) => {
+const DataDisplay = ({ url, provider, urlType }) => {
     const [stakersCount, setStakersCount] = React.useState(0);
     const [badTokens, setBadTokens] = React.useState(0);
     const [safeTokens, setSafeTokens] = React.useState(0);
@@ -45,7 +45,10 @@ const DataDisplay = ({ url, provider }) => {
             console.log(currentAccount)
             // 调用智能合约函数
             try {
-                url = getTopLevelDomain(url)
+                if (checkData(url, urlType)) {
+                    url = getTopLevelDomain(url);
+                }
+
                 console.log(url)
                 let websiteInfo = new Object();
                 websiteInfo.url = url
@@ -115,6 +118,30 @@ const DataDisplay = ({ url, provider }) => {
                 console.error('Invalid URL:', error);
                 return "";
             }
+        }
+
+        function checkData(url, type) {
+            console.log("check url" + type)
+            switch (type) {
+                case 'Website':
+
+                    if (url.endsWith('.eth') && !url.startsWith('@')) {
+                        return true
+                    }
+                    break;
+                case 'Twitter':
+                    if (url.startsWith('@')) {
+                        return false
+                    }
+                    break;
+                case 'ENS':
+                    if (url.endsWith('@')) {
+                        return false
+                    }
+                    break;
+            }
+
+            return true;
         }
 
         const timer = setInterval(() => {
